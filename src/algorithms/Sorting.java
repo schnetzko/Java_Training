@@ -3,12 +3,17 @@ package algorithms;
 import java.io.*;
 import java.util.*;
 
+/** 
+ * @author schnetzko
+ * 
+ * class Sorting which provides a sorting API.
+ */
 public class Sorting {
 
 	/**
 	 * Swap applied on int array.
 	 * 
-	 * @param array
+	 * @param array the array where swap will be applied on
 	 * @param a_Idx
 	 * @param b_Idx
 	 */
@@ -21,20 +26,20 @@ public class Sorting {
 	/**
 	 * Swap applied on List<Integer>.
 	 * 
-	 * @param array
+	 * @param list the list where swap will be applied on
 	 * @param a_Idx
 	 * @param b_Idx
 	 */
-	public static void swap (List <Integer> array, int a_Idx, int b_Idx){
-		int tmp = array.get(a_Idx);
-		array.set(a_Idx, array.get(b_Idx));
-		array.set(b_Idx, tmp);
+	public static void swap (List <Integer> list, int a_Idx, int b_Idx){
+		int tmp = list.get(a_Idx);
+		list.set(a_Idx, list.get(b_Idx));
+		list.set(b_Idx, tmp);
 	}
 	
 	/**
 	 * Print an int array on System.out.
 	 * 
-	 * @param array
+	 * @param array the array to be printed
 	 */
 	public static void printArray (int array[]){
 		System.out.print("created array with " + array.length + " elements:");
@@ -47,11 +52,33 @@ public class Sorting {
 		System.out.println("");		
 	}
 
+	/**
+	 * Insertion sort algorithm applied on type List<Integer>.
+	 * 
+	 * @param list the list to be sorted
+	 */
+	public static void insertion_sort (List<Integer> list){
+		/* iterate (and sort) from left to right in an ascending order */
+		for (int i = 1; i < list.size(); i++){
+			int tmp = list.get(i);
+			int j = i - 1;
+			/* Sort a subset of complete list and start with 2 values. 
+			 * Continue with one more value and sort it with
+			 * the already sorted subset list while iterating from right to left. */ 
+			while ((j >= 0) && (list.get(j) >  tmp)){
+				list.set(j+1, list.get(j));
+				j--;
+			}
+			list.set(j+1, tmp);
+		}
+	}
+	
 	/** 
 	 * Quick sort algorithm applied on type List<Integer>.
 	 * This quick sort takes a key-comparison-value from the middle of the list.
 	 * This is a recursive method which calls itself again if there is a partial list to sort.
 	 * 
+	 * @param list the list to be sorted
 	 * @param beginIdx begin index
 	 * @param endIdx end index
 	 */
@@ -167,20 +194,21 @@ public class Sorting {
 	public static void main(String[] args) {
 		StringBuffer outputStr = new StringBuffer();
 		outputStr.append("APPlICATION - Sorting of unsorted integer array lists\n");
-//		System.out.println("press CTRL + C to exit");
 		outputStr.append("(n)umber of integer array lists you want to sort\n");
 		outputStr.append("(q)uit to exit\n");
+//		outputStr.append(" or press CTRL + C to exit");
 		
 		String inputStr = null;
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));		
 
 		int numberOfarrayLists = 0;
+		int numberOfarrayList = 0;
 
 		/* A dynamic ArrayList which contains fixed sized Integer lists.
-		 * With a dynamic ArrayList we are able to this list during runtime.
-		 * Each fixed sized Integer list has to be fixed to be able apply sort algorithms
-		 * on their data using their index.	*/
+		 * While using a dynamic ArrayList we are able to handle this list during runtime like a stack.
+		 * Each fixed sized Integer list has to be fixed-sized,
+		 * because it's a requirement to apply the sorting algorithms which are provided here. */
 		ArrayList<List<Integer>> arrayLists = null;
 
 		List<Integer> arrayListResult = Arrays.asList(new Integer[0]);
@@ -241,13 +269,12 @@ public class Sorting {
 					continue;
 				}
 				catch (NumberFormatException e){
-					e.printStackTrace();
 					System.out.println("Incorrect number format, try it again!");
 					System.out.print(outputStr.toString());
 					continue;
 				}
 				if (numberOfarrayLists <= 0){
-					System.out.println("please enter a number >= 0");
+					System.out.println("please enter a number > 0");
 					System.out.print(outputStr.toString());
 					continue;
 				}
@@ -257,22 +284,28 @@ public class Sorting {
 						System.out.print("enter number of elements of array list " + i + ":");
 						try {
 							inputStr = br.readLine();
-							arrayLists.add(Arrays.asList(new Integer [Integer.parseInt(inputStr)]));
+							numberOfarrayLists = Integer.parseInt(inputStr);
 						}
 						catch (IOException e){
 							e.printStackTrace();
 							System.out.println("Could not read data from console, try it again!");
 							System.out.print(outputStr.toString());
 							arrayLists.clear();
-							continue;
+							break;
 						}
 						catch (NumberFormatException e){
-							e.printStackTrace();
 							System.out.println("Incorrect number format, try it again!");
 							System.out.print(outputStr.toString());
 							arrayLists.clear();
-							continue;
+							break;
 						}
+						if (numberOfarrayLists <= 0){
+							System.out.println("please enter a number > 0");
+							System.out.print(outputStr.toString());
+							arrayLists.clear();
+							break;
+						}
+						arrayLists.add(Arrays.asList(new Integer [Integer.parseInt(inputStr)]));
 						for (int j = 0; j < arrayLists.get(i).size(); j++){
 							System.out.println("enter integer on index [" + j + "]: ");
 							try {
@@ -287,7 +320,6 @@ public class Sorting {
 								continue;
 							}
 							catch (NumberFormatException e){
-								e.printStackTrace();
 								System.out.println("Incorrect number format, try it again!");
 								System.out.print(outputStr.toString());
 								arrayLists.clear();
@@ -302,7 +334,8 @@ public class Sorting {
 					System.out.println("1. starting sorting on each array list...");
 					System.out.println();
 					for (int i = 0; i < arrayLists.size(); i++){
-						quick_sort(arrayLists.get(i), 0, arrayLists.get(i).size()-1);
+//						quick_sort(arrayLists.get(i), 0, arrayLists.get(i).size()-1);
+						insertion_sort(arrayLists.get(i));
 						System.out.print("array list " + i + " sorted:");
 						System.out.print(arrayLists.get(i));
 						System.out.println();
