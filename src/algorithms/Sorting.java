@@ -7,6 +7,7 @@ import java.util.*;
  * @author schnetzko
  * 
  * class Sorting which provides a sorting API.
+ * tested with OpenJDK 1.8
  */
 public class Sorting {
 
@@ -203,15 +204,15 @@ public class Sorting {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));		
 
 		int numberOfarrayLists = 0;
-		int numberOfarrayList = 0;
+		int numberOfelements = 0;
 
-		/* A dynamic ArrayList which contains fixed sized Integer lists.
-		 * While using a dynamic ArrayList we are able to handle this list during runtime like a stack.
-		 * Each fixed sized Integer list has to be fixed-sized,
-		 * because it's a requirement to apply the sorting algorithms which are provided here. */
+		/* A dynamic ArrayList which contains fixed sized integer lists.
+		 * While using a dynamic ArrayList we are able to handle this list during runtime
+		 * similar to a stack. Each integer list has to be fixed-sized, because otherwise
+		 * the sorting algorithms provided here will not work. */
 		ArrayList<List<Integer>> arrayLists = null;
 
-		List<Integer> arrayListResult = Arrays.asList(new Integer[0]);
+		List<Integer> arrayListResult = null;
 		
 //		SignalHandler oldSigTERM = Signal.handle(
 //								   new Signal("SIGTERM"),
@@ -279,30 +280,34 @@ public class Sorting {
 					continue;
 				}
 				else{
-					arrayLists = new ArrayList<List<Integer>>(numberOfarrayLists);	
-					for (int i = 0; i < numberOfarrayLists; i++){
+					arrayLists = new ArrayList<List<Integer>>(numberOfarrayLists);
+					boolean restart = false; 
+					for (int i = 0; i < numberOfarrayLists && !restart; i++){
 						System.out.print("enter number of elements of array list " + i + ":");
 						try {
 							inputStr = br.readLine();
-							numberOfarrayLists = Integer.parseInt(inputStr);
+							numberOfelements = Integer.parseInt(inputStr);
 						}
 						catch (IOException e){
 							e.printStackTrace();
 							System.out.println("Could not read data from console, try it again!");
 							System.out.print(outputStr.toString());
 							arrayLists.clear();
+							restart = true;
 							break;
 						}
 						catch (NumberFormatException e){
 							System.out.println("Incorrect number format, try it again!");
 							System.out.print(outputStr.toString());
 							arrayLists.clear();
+							restart = true;
 							break;
 						}
-						if (numberOfarrayLists <= 0){
+						if (numberOfelements <= 0){
 							System.out.println("please enter a number > 0");
 							System.out.print(outputStr.toString());
 							arrayLists.clear();
+							restart = true;
 							break;
 						}
 						arrayLists.add(Arrays.asList(new Integer [Integer.parseInt(inputStr)]));
@@ -317,50 +322,63 @@ public class Sorting {
 								System.out.println("Could not read data from console, try it again!");
 								System.out.print(outputStr.toString());
 								arrayLists.clear();
-								continue;
+								restart = true;
+								break;
 							}
 							catch (NumberFormatException e){
 								System.out.println("Incorrect number format, try it again!");
 								System.out.print(outputStr.toString());
 								arrayLists.clear();
-								continue;
+								restart = true;
+								break;
 							}
 						}
-						System.out.print("created array list with " + arrayLists.get(i).size() + " elements:");
-						System.out.print(arrayLists.get(i));
+						if (!restart){
+							System.out.print("created array list with " + arrayLists.get(i).size() + " elements:");
+							System.out.print(arrayLists.get(i));
+							System.out.println();
+						}
+					}	
+					if (!restart){
 						System.out.println();
-					}					
-					System.out.println();
-					System.out.println("1. starting sorting on each array list...");
-					System.out.println();
-					for (int i = 0; i < arrayLists.size(); i++){
-//						quick_sort(arrayLists.get(i), 0, arrayLists.get(i).size()-1);
-						insertion_sort(arrayLists.get(i));
-						System.out.print("array list " + i + " sorted:");
-						System.out.print(arrayLists.get(i));
-						System.out.println();
-					}		
-			
-					if (arrayLists.size() > 1)
-						System.out.println();
-						System.out.println("2. starting sorting each array list with each other...");
+						System.out.println("1. starting sorting on each array list...");
 						System.out.println();
 						for (int i = 0; i < arrayLists.size(); i++){
-							arrayListResult = Sorting.sort(arrayListResult, arrayLists.get(i));
-						}
-					}
+	//						quick_sort(arrayLists.get(i), 0, arrayLists.get(i).size()-1);
+							insertion_sort(arrayLists.get(i));
+							System.out.print("array list " + i + " sorted:");
+							System.out.print(arrayLists.get(i));
+							System.out.println();
+						}		
 				
-					System.out.println("resulting sorted array list: ");
-					System.out.println(arrayListResult);
-					System.out.println();
-					System.out.print(outputStr.toString());
-					arrayLists.clear();
+						arrayListResult = arrayLists.get(0);
+						
+						if (arrayLists.size() > 1){
+							System.out.println();
+							System.out.println("2. starting sorting each array list with each other...");
+							System.out.println();
+							for (int i = 1; i < arrayLists.size(); i++){
+								arrayListResult = Sorting.sort(arrayListResult, arrayLists.get(i));
+							}
+							System.out.println("resulting sorted array list: ");
+							System.out.println(arrayListResult);
+							System.out.println();
+							System.out.print(outputStr.toString());
+						}
+						else{
+							System.out.println();
+							System.out.println("there is only 1 array list which is already sorted...");
+							System.out.println();	
+						}	
+						arrayLists.clear();
+					}
 				}
-				else {
-					System.out.println("Wrong input!");
-					System.out.print(outputStr.toString());
-				}
+			} // end of case "n"
+			else {
+				System.out.println("Wrong input!");
+				System.out.print(outputStr.toString());
 			}
+		} // end of while loop
 		try {
 			br.close();
 		}
