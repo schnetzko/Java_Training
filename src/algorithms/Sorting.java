@@ -197,7 +197,6 @@ public class Sorting {
 		outputStr.append("APPlICATION - Sorting of unsorted integer array lists\n");
 		outputStr.append("(n)umber of integer array lists you want to sort\n");
 		outputStr.append("(q)uit to exit\n");
-//		outputStr.append(" or press CTRL + C to exit");
 		
 		String inputStr = null;
 
@@ -214,32 +213,6 @@ public class Sorting {
 
 		List<Integer> arrayListResult = null;
 		
-//		SignalHandler oldSigTERM = Signal.handle(
-//								   new Signal("SIGTERM"),
-//								   new SignalHandler() {
-//									   public void handle(Signal signal) {
-//										   System.err.println("Quit using SIGTERM hook");
-//										   notificationHandler.prepareToQuit();
-//										   if (oldSigTERM != null) {
-//											   oldSigTERM.handle(signal);
-//										   }
-//									   }
-//								   });
-
-//		Runtime.getRuntime().addShutdownHook(new Thread() {
-//	        public void run() {
-//	            try {
-//	            	Thread.sleep(1);
-//	                System.out.println("Shutting down ...");
-//	                //some cleaning up code...
-//
-//	            } catch (InterruptedException e) {
-//	                // TODO Auto-generated catch block
-//	                e.printStackTrace();
-//	            }
-//	        }
-//	    });		
-
 		System.out.print(outputStr.toString());
 
 		while (true){
@@ -341,7 +314,7 @@ public class Sorting {
 					}	
 					if (!restart){
 						System.out.println();
-						System.out.println("1. starting sorting on each array list...");
+						System.out.println("1. starting sorting each array list...");
 						System.out.println();
 						for (int i = 0; i < arrayLists.size(); i++){
 	//						quick_sort(arrayLists.get(i), 0, arrayLists.get(i).size()-1);
