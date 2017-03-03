@@ -37,7 +37,7 @@ public class Termination implements Runnable{
 		while (true){
 			// do something ...
 			try{
-				/* Let's the main thread sleep a little bit that the terminal thread
+				/* Let's sleep the main thread a little bit that the "Termination" thread
 				 * can take over the control during this time to check the terminal input. */
 				Thread.sleep(10);
 			}
@@ -45,7 +45,7 @@ public class Termination implements Runnable{
 				e.printStackTrace();
 			}
 			if (quit){
-				System.out.println("...application terminated");
+				System.out.println("...demo terminated");
 				break;
 			}
 		}	
