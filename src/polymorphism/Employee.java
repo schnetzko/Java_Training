@@ -24,19 +24,21 @@ public class Employee extends Person {
 		super();
 		company = "unemployeed";
 	}	
-	public Employee(String company, Position pos){
+	public Employee(String company, Position position){
 		super();
 		this.company = company;
-		this.position = pos;
+		this.position = position;
 	}	
 	public Employee(String forename, String surname, int age, String street, String number, String city, String zip, String company, Position pos){
-		super();
+		super(forename, surname, age, street, number, city, zip);
 		this.company = company;
 		this.position = pos;
 	}
 	
+	/* overwriting toString() */
 	public String toString(){
 		StringBuffer strbuffer = new StringBuffer();
+		strbuffer.append(super.toString());
 		strbuffer.append("Company: " + company + "\n");
 		strbuffer.append("Position: " + position + "\n");
 		return strbuffer.toString();
