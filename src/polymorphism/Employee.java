@@ -5,7 +5,7 @@ public class Employee extends Person {
 	private String company;
 	private Position position;
 	
-	/* getter and setter */
+	/* getter and setters */
 	public String getCompany(){
 		return company;
 	}
@@ -35,12 +35,15 @@ public class Employee extends Person {
 		this.position = pos;
 	}
 	
-	/* overwriting toString() */
-	public String toString(){
+	/**
+	 * polymorphic method
+	 */	
+	@Override
+	public String convertToString() {
 		StringBuffer strbuffer = new StringBuffer();
-		strbuffer.append(super.toString());
+		strbuffer.append(super.convertToString());
 		strbuffer.append("Company: " + company + "\n");
 		strbuffer.append("Position: " + position + "\n");
 		return strbuffer.toString();
-	}
+	}	
 }

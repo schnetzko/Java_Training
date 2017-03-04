@@ -9,7 +9,7 @@ public class Person {
 	private String city;
 	private String zip;
 	
-	/* getter and setter */
+	/* getter and setters */
 	public String getForename() {
 		return forename;
 	}
@@ -55,7 +55,6 @@ public class Person {
 
 	/* constructors */
 	public Person() {
-//		super(); // TODO: Do we need this?
 		this.forename = "";
 		this.surname = "";
 		this.age = 0;
@@ -65,7 +64,6 @@ public class Person {
 		this.zip = "";
 	}
 	public Person(String forename, String surname, int age, String street, String number, String city, String zip) {
-//		super(); // TODO: Do we need this?
 		this.forename = forename;
 		this.surname = surname;
 		this.age = age;
@@ -75,8 +73,11 @@ public class Person {
 		this.zip = zip;
 	}
 
-	/* overwriting toString() */
-	public String toString(){
+	/**
+	 * separate method instead of overwriting toString()
+	 * to show the purpose of @override annotation in derived class Employee
+	 */
+	public String convertToString(){
 		StringBuffer strbuffer = new StringBuffer();
 		strbuffer.append("Forename: " + forename + "\n");
 		strbuffer.append("Surname: " + surname + "\n");
