@@ -35,9 +35,11 @@ public class Employee extends Person {
 		this.position = pos;
 	}
 	
-	/**
-	 * polymorphic method
-	 */	
+	/* polymorphic method
+	 * 
+	 * "@override" annotation let the compiler check 
+	 * that the super class has a method with the same signature
+	 * which is overridden here */	
 	@Override
 	public String convertToString() {
 		StringBuffer strbuffer = new StringBuffer();

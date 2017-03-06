@@ -73,10 +73,9 @@ public class Person {
 		this.zip = zip;
 	}
 
-	/**
-	 * separate method instead of overwriting toString()
-	 * to show the purpose of @override annotation in derived class Employee
-	 */
+	/* separate method instead of overwriting toString() just to show
+	 * the purpose of @override annotation for the same method, but in 
+	 * derived class Employee */
 	public String convertToString(){
 		StringBuffer strbuffer = new StringBuffer();
 		strbuffer.append("Forename: " + forename + "\n");
