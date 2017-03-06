@@ -1,4 +1,4 @@
-package dependency_injection;
+package dependency_injection.consumer;
 
 public interface IPaymentConsumer {
 	void orderPayment(Long money);

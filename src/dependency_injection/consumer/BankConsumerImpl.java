@@ -1,10 +1,12 @@
-package dependency_injection;
+package dependency_injection.consumer;
+
+import dependency_injection.service.IPaymentService;
 
 public class BankConsumerImpl implements IPaymentConsumer{
 
 	private IPaymentService paymentService;
 	
-	BankConsumerImpl(IPaymentService paymentService){
+	public BankConsumerImpl(IPaymentService paymentService){
 		this.paymentService = paymentService;
 	}
 	

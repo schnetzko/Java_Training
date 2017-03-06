@@ -1,12 +1,12 @@
-package dependency_injection;
+package dependency_injection.service;
 
 import java.util.logging.Level;
 
 import com.sun.istack.internal.logging.Logger;
 
-public class PaypalPaymentImpl implements IPaymentService {
+public class PaypalPaymentServiceImpl implements IPaymentService {
 
-	private static final Logger LOGGER = Logger.getLogger(PaypalPaymentImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(PaypalPaymentServiceImpl.class);
 	
 	@Override
 	public void pay(Long money) {

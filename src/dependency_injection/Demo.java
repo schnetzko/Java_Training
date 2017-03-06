@@ -1,5 +1,11 @@
 package dependency_injection;
 
+import dependency_injection.consumer.IPaymentConsumer;
+import dependency_injection.injector.CashPaymentServiceInjectorImpl;
+import dependency_injection.injector.IPaymentServiceInjector;
+import dependency_injection.injector.PaypalPaymentServiceInjectorImpl;
+import dependency_injection.injector.VisaPaymentServiceInjectorImpl;
+
 public class Demo {
 
 	public static void main(String[] args) {
@@ -10,6 +16,7 @@ public class Demo {
 		IPaymentServiceInjector injector = null;
 		IPaymentConsumer app = null;
 		
+		/* create an injection obj, generate an app from it and run this app */
 		injector = new CashPaymentServiceInjectorImpl();
 		app = injector.getPaymentConsumer();
 		app.orderPayment(moneyPayedByCash);		
