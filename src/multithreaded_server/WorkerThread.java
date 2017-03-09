@@ -28,7 +28,7 @@ public class WorkerThread implements Runnable{
             input.close();
             System.out.println("Request processed: " + time);
         } catch (IOException e) {
-            //report exception somewhere.
+            //TODO: work with a Logging API
             e.printStackTrace();
         }
     }

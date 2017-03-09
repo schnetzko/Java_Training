@@ -7,7 +7,7 @@ public class Demo {
 		new Thread(server).start();
 
 		try {
-		    Thread.sleep(1000 * 1000);
+		    Thread.sleep(1000 * 1000); // let the main()-thread sleep
 		} catch (InterruptedException e) {
 		    e.printStackTrace();  
 		}

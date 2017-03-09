@@ -3,13 +3,17 @@ package multithreaded_server;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.IOException;
+// import java.util.concurrent.ExecuterService
+// import java.util.concurrent.Executers
 
 public class Server implements Runnable{
 
-    protected int          serverPort   = 8080;
-    protected ServerSocket serverSocket = null;
-    protected boolean      isStopped    = false;
-    protected Thread       runningThread= null;
+    protected int			serverPort = 8080; /* default */
+    protected ServerSocket	serverSocket = null;
+    protected boolean		isStopped = false;
+    protected Thread		runningThread= null;
+    protected ThreadPool	threadPool = new ThreadPool(10, 10);
+    //    protected ExecutorService threadPool = Executors.newFixedThreadPool(10);
 
     public Server(int port){
         this.serverPort = port;
@@ -31,14 +35,22 @@ public class Server implements Runnable{
             catch (IOException e) {
                 if(isStopped()) {
                     System.out.println("Server Stopped.") ;
-                    return;
+                    break;
                 }
                 throw new RuntimeException(
                     "Error accepting client connection", e);
             }
-            new Thread(new WorkerThread(clientSocket, "Multithreaded Server")).start();
+            
+            try {
+            	this.threadPool.execute(new WorkerThread(clientSocket, "Worker Thread from Thread Pool"));
+            }
+            catch (Exception e){
+            	e.printStackTrace();
+            }
+//            this.threadPool.execute(new WorkerRunnable(clientSocket,"Worker Thread from Thread Pool"));
         }
         
+        this.threadPool.shutdown(); // similar to ExecuterService.shutdown()?
         System.out.println("Server Stopped.");
     }
 
@@ -61,7 +73,7 @@ public class Server implements Runnable{
             this.serverSocket = new ServerSocket(this.serverPort);
         } 
         catch (IOException e) {
-            throw new RuntimeException("Cannot open port 8080", e);
+            throw new RuntimeException("Cannot open port " + this.serverPort, e);
         }
     }
 }
