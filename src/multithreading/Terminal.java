@@ -1,51 +1,76 @@
-package stubs;
+package multithreading;
 
 
 import java.io.*;
 
-public class Termination implements Runnable{
+public class Terminal implements Runnable{
 
-	static BufferedReader in; 
 	
-	/* Thread safe, because it's an immutable data type.
-	 * So main thread and terminal thread can concurrently access on it. */
+	// TODO: This needs to check!
+	/* Thread safe, because it's an primitive data type where its values are immutable.
+	 * So main thread and terminal thread can concurrently access on it?! */	
 	static boolean quit = false;
 	
+	BufferedReader in; 
+		
 	public void run(){
 		String msg = null;
+		in = new BufferedReader(new InputStreamReader(System.in));
+		
+		System.out.println("Enter (q)uit to exit this application.");
 		
 		while (true){
 			try {
 				msg = in.readLine();
 			}
 			catch(IOException e){
-				e.printStackTrace();
+				System.out.println("Couldn't read from the command line, pls try it again.");
 			}
 			
 			if (msg.equals("q")){
-				quit = true;
+				quit = true;	// inform the main thread, this thread will be terminated now
+				try {
+					in.close();
+				}
+				catch (IOException e){
+					System.out.println("Problem happens while closing the BufferedReader.");
+					e.printStackTrace();
+				}
 				break;
+			} else {			// .. do something like parsing the input, run commands,...				
+				System.out.println("echo " + "\"" + msg  + "\"");
 			}
 		}
 	}
 	
 	public static void main (String args[]){
-		in = new BufferedReader(new InputStreamReader(System.in));
-		Thread terminalThread = new Thread(new Termination());
-		terminalThread.start();
-		System.out.println("Enter (q)uit to exit this application.");
+				
+		Thread terminalThread = new Thread(new Terminal());	// At this moment, 2 objects are created - 
+															// at first the already created Terminal-object and
+															// secondly the now created Thread-object.
+															// The Thread-object is initialized by a second created Terminal-object.
+		
+		terminalThread.start(); // The "main"-thread (Terminal-object) is already running.
+								// Now  the "terminal"-thread (Thread-object => contains a Terminal object as well)
+								// starts running as well.
 		while (true){
 			// do something ...
 			try{
-				/* Let's sleep the main thread a little bit that the "Termination" thread
-				 * can take over the control during this time to check the terminal input. */
 				Thread.sleep(10);
+				// TODO: Would be nice to receiving an event instead of active polling?! 
 			}
 			catch(InterruptedException e){
 				e.printStackTrace();
 			}
 			if (quit){
-				System.out.println("...demo terminated");
+				try {
+					terminalThread.join();	// To be safe, waiting until "terminal"-thread has "officially" finished his work
+										  	// even if "quit" variable was already set to true by the "terminal"-thread.  
+					System.out.println("...demo terminated");
+				}
+				catch (InterruptedException e) {
+					System.out.println("...\"terminal\"-thread has not successfully terminated");
+				} 
 				break;
 			}
 		}	
