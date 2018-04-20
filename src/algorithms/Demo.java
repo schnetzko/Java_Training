@@ -41,11 +41,13 @@ public class Demo {
 				System.out.print(outputStr.toString());
 				continue;
 			}
+			// (q)uit - handling
 			if (inputStr.equals("q")){
-				System.out.println("...demo terminated");
+				System.out.println("...demo will be terminated");
 				System.out.println();
 				break;
 			}
+			// (n)umber of arrays handling
 			else if(inputStr.equals("n")){
 				System.out.print("number of array lists: ");
 				try {
@@ -53,13 +55,14 @@ public class Demo {
 					numberOfarrayLists = Integer.parseInt(inputStr);
 				}
 				catch (IOException e){
-					e.printStackTrace();
-					System.out.println("Could not read data from console, try it again!");
+					// e.printStackTrace(); // uncommented, because doesn't look good printing an exception on console
+					System.out.println("Could not read data from console, try it again!"); // TODO: Is there a chance to avoid this redundant code somehow?
 					System.out.print(outputStr.toString());
 					continue;
 				}
 				catch (NumberFormatException e){
-					System.out.println("Incorrect number format, try it again!");
+					// e.printStackTrace(); // uncommented, because doesn't look good printing an exception on console
+					System.out.println("Incorrect number format, try it again!"); // TODO: Is there a chance to avoid this redundant code somehow?
 					System.out.print(outputStr.toString());
 					continue;
 				}
@@ -68,9 +71,14 @@ public class Demo {
 					System.out.print(outputStr.toString());
 					continue;
 				}
-				else{
+				// numberOfarrayLists is known, start requesting values for each arrayList 
+				else {
 					arrayLists = new ArrayList<List<Integer>>(numberOfarrayLists);
-					boolean restart = false; 
+					boolean restart = false;	// flag that forces a restart of this command line application 
+												// (jump to the beginning of the outer loop)
+					// check each arrayList creation 
+					// the "restart" variable in this loop handles the case of exception happening in the inner-loop
+					// a "restart" set to true in this loop leads to a suppression of printing an result (see case below "if (!restart){..}")
 					for (int i = 0; i < numberOfarrayLists && !restart; i++){
 						System.out.print("enter number of elements of array list " + i + ":");
 						try {
@@ -78,16 +86,17 @@ public class Demo {
 							numberOfelements = Integer.parseInt(inputStr);
 						}
 						catch (IOException e){
-							e.printStackTrace();
-							System.out.println("Could not read data from console, try it again!");
-							System.out.print(outputStr.toString());
+							// e.printStackTrace(); // uncommented, because doesn't look good printing an exception on console
+							System.out.println("Could not read data from console, try it again!"); // TODO: Is there a chance to avoid this redundant code somehow?
+							System.out.print(outputStr.toString()); 
 							arrayLists.clear();
 							restart = true;
 							break;
 						}
 						catch (NumberFormatException e){
-							System.out.println("Incorrect number format, try it again!");
-							System.out.print(outputStr.toString());
+							// e.printStackTrace(); // uncommented, because doesn't look good printing an exception on console
+							System.out.println("Incorrect number format, try it again!"); // TODO: Is there a chance to avoid this redundant code somehow?
+							System.out.print(outputStr.toString()); 
 							arrayLists.clear();
 							restart = true;
 							break;
@@ -99,23 +108,25 @@ public class Demo {
 							restart = true;
 							break;
 						}
+						// arrayList creation is done and can start now reading and adding values to the list
 						arrayLists.add(Arrays.asList(new Integer [Integer.parseInt(inputStr)]));
-						for (int j = 0; j < arrayLists.get(i).size(); j++){
+						for (int j = 0; j < arrayLists.get(i).size(); j++) {
 							System.out.println("enter integer on index [" + j + "]: ");
 							try {
 								inputStr = br.readLine();
 								arrayLists.get(i).set(j, Integer.parseInt(inputStr));
 							}
 							catch (IOException e){
-								e.printStackTrace();
-								System.out.println("Could not read data from console, try it again!");
+								// e.printStackTrace(); // uncommented, because doesn't look good printing an exception on console
+								System.out.println("Could not read data from console, try it again!"); // TODO: Is there a chance to avoid this redundant code somehow?
 								System.out.print(outputStr.toString());
 								arrayLists.clear();
 								restart = true;
 								break;
 							}
 							catch (NumberFormatException e){
-								System.out.println("Incorrect number format, try it again!");
+								// e.printStackTrace(); // uncommented, because doesn't look good printing an exception on console
+								System.out.println("Incorrect number format, try it again!"); // TODO: Is there a chance to avoid this redundant code somehow?
 								System.out.print(outputStr.toString());
 								arrayLists.clear();
 								restart = true;
@@ -174,6 +185,9 @@ public class Demo {
 		catch (IOException e){
 			e.printStackTrace();
 			System.out.println("Could not close buffered reader!");
+		}
+		finally {
+			System.out.println("Demo has terminated now!");
 		}
     }
 }
