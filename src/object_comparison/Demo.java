@@ -13,10 +13,10 @@ public class Demo {
 	 * Prints hash-codes to System.out from objects containing in the given array (supports all non-primitive data types).
 	 * 
 	 * "System.identityHashCode(Object obj)" prints the hash-code of an object using the original hashCode implementation (Object.hashCode()).
-	 * "obj.hashCode(Object obj)" prints the hash-code of an object using its hashCode() implementation if it was overwritten. 
-	 * Otherwise it will call Object.hashCode().
+	 * "obj.hashCode(Object obj)" prints the hash-code of an object using its hashCode() implementation if this method was overwritten, 
+	 * otherwise it will call Object.hashCode().
 	 * 
-	 * @param array of any type
+	 * @param array of any non-primitive type
 	 */
 	public static <T> void print_hashCodes(T [] array){
 		
@@ -48,8 +48,8 @@ public class Demo {
 	
 	/**
 	 * Prints hash-codes to System.out from values containing in the given arrays of the primitives data types.
-	 * (Java Generics do not support primitives. An alternative could be to wrap the primitives in their corresponding wrapper types
-	 * like Short, Long,... Then calling "<Type t> void print_hashCodes(T[])" would work.) 
+	 * (Java Generics do not support primitives. An alternative could be to wrap the primitives in their corresponding wrapper classes
+	 * like Short, Long,... Then calling "<T> void print_hashCodes(T [] array)" would work.) 
 	 * 
 	 * @param short_array
 	 * @param long_array
