@@ -31,8 +31,8 @@ public class Person {
 	 * an object by its hash-code using hashCode(). Each hash code points to a bucket.
 	 * Within a bucket all objects with the same hash-code are stored and will
 	 * by identified by using equals() as the second step. 
-	 * That's why hashCode() as well as equals() has overwrite to realize this behavior
-	 * for hash based container.
+	 * That's why hashCode() as well as equals() has to overwrite to implement this behavior
+	 * for hash based containers.
 	 * 
 	 * The default implementation of hash-code returns the current memory-address of an object,
 	 * but this memory address is converted to int (32 Bit).

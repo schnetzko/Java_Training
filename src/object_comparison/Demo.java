@@ -16,11 +16,11 @@ public class Demo {
 	 * "obj.hashCode(Object obj)" prints the hash-code of an object using its hashCode() implementation if this method was overwritten, 
 	 * otherwise it will call Object.hashCode().
 	 * 
-	 * @param array of any non-primitive type
+	 * @param array of any non-primitive data type (class)
 	 */
 	public static <T> void print_hashCodes(T [] array){
 		
-		System.out.println("print_hashCodes(..) of type " + array.getClass().getTypeName() + " using Java Generics");
+		System.out.println("print_hashCodes(..) of type " + array.getClass().getTypeName() + " using Java Generic");
 		/* Note:	There is no hashCode() method for primitives available,
 	     * 			because primitives are not classes. Thus, they can't inherit 
 	     * 			from class Object the base-implementation of hashCode() to call it.
@@ -43,12 +43,11 @@ public class Demo {
 			System.out.println("\tperson.hashCode(): " + element.hashCode());
 			System.out.println();
 		}
-			System.out.println();
 	}
 	
 	/**
 	 * Prints hash-codes to System.out from values containing in the given arrays of the primitives data types.
-	 * (Java Generics do not support primitives. An alternative could be to wrap the primitives in their corresponding wrapper classes
+	 * (Java Generic do not support primitives. An alternative could be to wrap the primitives in their corresponding wrapper classes
 	 * like Short, Long,... Then calling "<T> void print_hashCodes(T [] array)" would work.) 
 	 * 
 	 * @param short_array
@@ -76,18 +75,18 @@ public class Demo {
 	     * 			are stored in the same bucket. */	
 		System.out.println("\ttype short[]");
 		for (short element : short_array) {
-			System.out.print("\tSystem.identityHashCode(" + element + "): ");
+			System.out.print("\t\tSystem.identityHashCode(" + element + "): ");
 			System.out.print(System.identityHashCode(element));
 			System.out.println();
 		}
 		System.out.println();
 		System.out.println("\ttype long[]");
 		for (long element : long_array) {
-			System.out.print("\tSystem.identityHashCode(" + element + "): ");
+			System.out.print("\t\tSystem.identityHashCode(" + element + "): ");
 			System.out.print(System.identityHashCode(element));
 			System.out.println();
 		}
-		System.out.println();		
+		System.out.println();
 	}
 	
 	/**
@@ -144,66 +143,67 @@ public class Demo {
 //	}	
 
 	/**
-	 * Prints results about comparison between values of primitive arrays
-	 * and between objects of a Person array.
+	 * Prints results about comparison between objects of an array (supports all non-primitive data types).
+	 * It will compare using ==-operator and equals()-method.
+	 * Each object will be compared with another object of this array. 
+	 *  
+	 * @param array of any non-primitive data type (class)
+	 */
+	public static <T>void print_comparisons(T [] array) {
+		System.out.println("print_comparisons(..) of type " + array.getClass().getTypeName() + " using Java Generic");		
+		int array_length = array.length;
+		if (array_length > 1) {
+			for (int i = 0; i < array_length; i++) {
+				for (int j = i, k = i+1; k < array_length; k++) {
+					System.out.print("\t" + array[j] + " == " + array[k] + ": ");
+					System.out.print(array[j] == array[k]);
+					System.out.println();
+					System.out.print("\t" + array[j] + " equals() " + array[k] + ": ");
+					System.out.print(array[j].equals(array[k]));
+					System.out.println();
+				}
+			}
+		}
+		System.out.println();
+	}
+	
+	/**
+	 * Prints results about comparison between values of arrays of primitive data types.
+	 * (Java Generic do not support primitives. An alternative could be to wrap the primitives in their corresponding wrapper classes
+	 * like Short, Long,... Then calling "<T>void print_comparisons(T [] array)" would work.)
+	 * It will compare using ==-operator and equals()-method.
+	 * Each value will be compared with another value of the same array. 
 	 *  
 	 * @param short_array
 	 * @param long_array
-	 * @param persons
 	 */
-	public static void print_comparisons(short [] short_array, long [] long_array, Person persons[]) {
-		System.out.println("print_comparisons(..)");		
+	public static void print_comparisons(short [] short_array, long [] long_array) {
+		System.out.println("print_comparisons(..) for primitive data types");		
 		System.out.println("\tshort values comparison using == operator");
 		int array_length = short_array.length;
 		if (array_length > 1) {
 			for (int i = 0; i < array_length; i++) {
 				for (int j = i, k = i+1; k < array_length; k++) {
-					System.out.print("\t" + short_array[j] + " == " + short_array[k] + ": ");
+					System.out.print("\t\t" + short_array[j] + " == " + short_array[k] + ": ");
 					System.out.print(short_array[j] == short_array[k]);
 					System.out.println();
 				}
 			}
-		}
-		
+		}		
 		System.out.println();
+		
 		System.out.println("\tlong values comparison using == operator");
 		array_length = long_array.length;
 		if (array_length > 1) {
 			for (int i = 0; i < array_length; i++) {
 				for (int j = i, k = i+1; k < array_length; k++) {
-					System.out.print("\t" + long_array[j] + " == " + long_array[k] + ": ");
+					System.out.print("\t\t" + long_array[j] + " == " + long_array[k] + ": ");
 					System.out.print(long_array[j] == long_array[k]);
 					System.out.println();
 				}
 			}
 		}
-		
 		System.out.println();
-		System.out.println("\tPerson objects comparison using == operator (reference comparison)");
-		array_length = persons.length;
-		if (array_length > 1) {
-			for (int i = 0; i < array_length; i++) {
-				for (int j = i, k = i+1; k < array_length; k++) {
-					System.out.print("\t" + persons[j] + " == " + persons[k] + ": ");
-					System.out.print(persons[j] == persons[k]);
-					System.out.println();
-				}
-			}
-		}
-
-		System.out.println();
-		System.out.println("\tPerson objects comparison using equals-method (semantic comparison)");
-		array_length = persons.length;
-
-		if (array_length > 1) {
-			for (int i = 0; i < array_length; i++) {
-				for (int j = i, k = i+1; k < array_length; k++) {
-					System.out.print("\t" + persons[j] + " equals() " + persons[k] + ": ");
-					System.out.print(persons[j].equals(persons[k]));
-					System.out.println();
-				}
-			}
-		}
 	}
 	
 	public static void main(String[] args) {
@@ -227,9 +227,12 @@ public class Demo {
 		Demo.print_hashCodes(short_wrapper);
 		Demo.print_hashCodes(long_wrapper);
 		Demo.print_hashCodes(persons);
-//		Demo.print_comparisons(primitives_short, primitives_long, persons);
+		
+		Demo.print_comparisons(short_primitives, long_primitives);
+		Demo.print_comparisons(short_wrapper);
+		Demo.print_comparisons(long_wrapper);
+		Demo.print_comparisons(persons);
 
-		System.out.println();
 		System.out.println("ArrayList (non-hash-based) calls equals() of Person class");
 	    List<Person> persons_list = new ArrayList<>();
 	    persons_list.add(p1);
