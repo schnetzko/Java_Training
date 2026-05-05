@@ -1,12 +1,11 @@
 package dependency_injection.service;
 
 import java.util.logging.Level;
-
-import com.sun.istack.internal.logging.Logger;
+import java.util.logging.Logger;
 
 public class CashPaymentServiceImpl implements IPaymentService {
 
-	private static final Logger LOGGER = Logger.getLogger(CashPaymentServiceImpl.class);
+	private static final Logger LOGGER = Logger.getLogger(CashPaymentServiceImpl.class.getName());
 	
 	@Override
 	public void pay(Long money) {

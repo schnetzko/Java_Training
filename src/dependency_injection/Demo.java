@@ -9,9 +9,9 @@ import dependency_injection.injector.VisaPaymentServiceInjectorImpl;
 public class Demo {
 
 	public static void main(String[] args) {
-		Long moneyPayedByCash = new Long (40000);
-		Long moneyPayedByVisa = new Long (50000);
-		Long moneyPayedByPaypal = new Long (60000);
+		Long moneyPayedByCash = Long.valueOf(40000);
+		Long moneyPayedByVisa = Long.valueOf(50000);
+		Long moneyPayedByPaypal = Long.valueOf(60000);
 
 		IPaymentServiceInjector injector = null;
 		IPaymentConsumer app = null;

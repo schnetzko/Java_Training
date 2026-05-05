@@ -1,0 +1,110 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Launch algorithms.Demo",
+      "request": "launch",
+      "mainClass": "algorithms.Demo",
+      "projectName": "Java_Training"
+    },
+    {
+      "type": "java",
+      "name": "Launch object_comparison.Demo",
+      "request": "launch",
+      "mainClass": "object_comparison.Demo",
+      "projectName": "Java_Training"
+    },
+    {
+      "type": "java",
+      "name": "Launch polymorphism.Demo",
+      "request": "launch",
+      "mainClass": "polymorphism.Demo",
+      "projectName": "Java_Training"
+    },
+    {
+      "type": "java",
+      "name": "Launch dependency_injection.Demo",
+      "request": "launch",
+      "mainClass": "dependency_injection.Demo",
+      "projectName": "Java_Training"
+    },
+    {
+      "type": "java",
+      "name": "Launch synchronization.object_level.synchronized_lock.Demo",
+      "request": "launch",
+      "mainClass": "synchronization.object_level.synchronized_lock.Demo",
+      "projectName": "Java_Training"
+    },
+    {
+      "type": "java",
+      "name": "Launch multithreaded_server.Demo",
+      "request": "launch",
+      "mainClass": "multithreaded_server.Demo",
+      "projectName": "Java_Training"
+    },
+    {
+      "type": "java",
+      "name": "Launch synchronization.object_level.unsynchronized.Demo",
+      "request": "launch",
+      "mainClass": "synchronization.object_level.unsynchronized.Demo",
+      "projectName": "Java_Training"
+    },
+    {
+      "type": "java",
+      "name": "Launch synchronization.object_level.synchronized_obj.Demo",
+      "request": "launch",
+      "mainClass": "synchronization.object_level.synchronized_obj.Demo",
+      "projectName": "Java_Training"
+    },
+    {
+      "type": "java",
+      "name": "Launch synchronization.object_level.synchronized_method.Demo",
+      "request": "launch",
+      "mainClass": "synchronization.object_level.synchronized_method.Demo",
+      "projectName": "Java_Training"
+    },
+    {
+      "type": "java",
+      "name": "Launch synchronization.object_level.synchronized_obj2.Demo",
+      "request": "launch",
+      "mainClass": "synchronization.object_level.synchronized_obj2.Demo",
+      "projectName": "Java_Training"
+    },
+    {
+      "type": "java",
+      "name": "Launch synchronization.class_level.synchronized_class.Demo",
+      "request": "launch",
+      "mainClass": "synchronization.class_level.synchronized_class.Demo",
+      "projectName": "Java_Training"
+    },
+    {
+      "type": "java",
+      "name": "Launch synchronization.class_level.unsynchronized.Demo",
+      "request": "launch",
+      "mainClass": "synchronization.class_level.unsynchronized.Demo",
+      "projectName": "Java_Training"
+    },
+    {
+      "type": "java",
+      "name": "Launch synchronization.class_level.synchronized_lock.Demo",
+      "request": "launch",
+      "mainClass": "synchronization.class_level.synchronized_lock.Demo",
+      "projectName": "Java_Training"
+    },
+    {
+      "type": "java",
+      "name": "Launch synchronization.class_level.synchronized_method.Demo",
+      "request": "launch",
+      "mainClass": "synchronization.class_level.synchronized_method.Demo",
+      "projectName": "Java_Training"
+    },
+    {
+      "type": "java",
+      "name": "Launch multithreading.Terminal",
+      "request": "launch",
+      "mainClass": "multithreading.Terminal",
+      "projectName": "Java_Training"
+    }
+  ]
+}
