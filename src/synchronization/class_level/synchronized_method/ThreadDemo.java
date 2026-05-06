@@ -22,7 +22,7 @@ public class ThreadDemo extends Thread {
 		// consider, the print outs below wont be synchronized
 		// only code within printCount(..) will be synchronized
 		System.out.println(this.getName() + " starting...");
-		this.printDemo.printCount(randomGenerator);
+		PrintDemo.printCount(randomGenerator);
 		System.out.println(this.getName() + " exiting...");
 	}
 }

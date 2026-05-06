@@ -1,7 +1,5 @@
 package object_comparison;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -22,7 +20,7 @@ public class Demo {
 		
 		System.out.println("print_hashCodes(..) of type " + array.getClass().getTypeName() + " using Java Generic");
 		/* Note:	There is no hashCode() method for primitives available,
-	     * 			because primitives are not classes. Thus, they can't inherit 
+	     * 			because primitives are not defined in classes. Thus, they can't inherit 
 	     * 			from class Object the base-implementation of hashCode() to call it.
 	     * 			But to still call the base-implementation of hashCode for primitives,
 	     * 			just call System.identityHashCode() as an alternative.
@@ -218,10 +216,6 @@ public class Demo {
 	    Person p2 = new Person (45, "Regina");
 	    Person p3 = new Person (45, "Regina");
 	    Person persons [] = {p1, p2, p3};	    
-		
-//	    DataTypes dataTypes = new DataTypes(primitives_short, primitives_long);
-//		DataTypes dataTypes = new DataTypes(primitives_short);
-//		Demo.print_hashCodes(dataTypes);
 		
 		Demo.print_hashCodes(short_primitives, long_primitives);
 		Demo.print_hashCodes(short_wrapper);

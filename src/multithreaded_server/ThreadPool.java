@@ -16,7 +16,7 @@ public class ThreadPool {
     
     /**
      * Constructor for warm-up start, because you can define how much worker threads are already started
-     * before the get the first task.
+     * before starting the first task.
      * 
      * @param numberOfThreads The number of threads which are already initialized to be ready applying
      * for the first task. It doesn't make sense to initialize more threads than maxNumberOfTask.
