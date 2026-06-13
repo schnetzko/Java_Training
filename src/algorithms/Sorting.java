@@ -4,7 +4,6 @@ import java.util.*;
 
 /** 
  * class Sorting which provides a sorting API.
- * tested with OpenJDK 1.8
  */
 public class Sorting {
 
@@ -74,7 +73,7 @@ public class Sorting {
 	/** 
 	 * Quick sort algorithm applied on type List<Integer>.
 	 * This quick sort takes a key-comparison-value from the middle of the list.
-	 * This is a recursive method which calls itself again if there is a partial list to sort.
+	 * This is a recursive method.
 	 * 
 	 * @param list the list to be sorted
 	 * @param beginIdx begin index
