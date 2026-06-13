@@ -5,7 +5,7 @@ A collection of Java training exercises and demos covering various algorithms, d
 ## Demos
 
 ### Algorithms
-- **algorithms.Demo**: Interactive console application for sorting unsorted integer array lists. Allows users to input the number of arrays and their elements, then sorts them.
+- **algorithms.CLI**: Interactive console application for sorting unsorted integer lists. Allows users to input the number of lists and their elements, then sorts them.
 
 ### Object Comparison
 - **object_comparison.Demo**: Demonstrates object hash codes and comparison. Shows the difference between `System.identityHashCode()` and `hashCode()` for various objects.

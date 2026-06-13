@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Demo {
+public class CLI {
 	public static void main(String[] args) {
 		StringBuffer outputStr = new StringBuffer();
 		outputStr.append("Sorting of unsorted integer lists\n");
@@ -137,6 +137,7 @@ public class Demo {
 				System.out.print(arrayLists.get(i));
 				System.out.println();
 			}	
+
 			// apply sorting algorithms on the lists and print the result
 			System.out.println();
 			System.out.println("1. start sorting each list...");
