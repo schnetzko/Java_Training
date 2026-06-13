@@ -3,9 +3,9 @@
   "configurations": [
     {
       "type": "java",
-      "name": "Launch algorithms.Demo",
+      "name": "Launch algorithms.CLI",
       "request": "launch",
-      "mainClass": "algorithms.Demo",
+      "mainClass": "algorithms.CLI",
       "projectName": "Java_Training"
     },
     {
