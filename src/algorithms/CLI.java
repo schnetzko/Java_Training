@@ -66,7 +66,7 @@ public class CLI {
 		int numberOfarrayLists = 0;
 		List<Integer> arrayListResult = null;
 
-		// number of lists validation
+		// validate "number of lists"
 		try {
 			inputStr = br.readLine();
 			numberOfarrayLists = Integer.parseInt(inputStr);
@@ -88,54 +88,16 @@ public class CLI {
 		}
 		else {
 			ArrayList<List<Integer>> arrayLists = new ArrayList<List<Integer>>(numberOfarrayLists);
-			int numberOfelements = 0;
 
-			for (int i = 0; i < numberOfarrayLists; i++){
-				System.out.print("enter number of elements for list " + i + ":");
-				// number of list validation
+			for (int i = 0; i < numberOfarrayLists; i++) {
 				try {
-					inputStr = br.readLine();
-					numberOfelements = Integer.parseInt(inputStr);
+					List<Integer> list = createList(br, outputStr, i);
+					arrayLists.add(list);
 				}
-				catch (IOException e){
-					System.out.println("Could not read data from command line, try it again.");
-					System.out.print(outputStr.toString()); 
+				catch (AlgorithmsCliException e) {
+					System.out.print(e.getMessage());
 					return;
 				}
-				catch (NumberFormatException e){
-					System.out.println("Incorrect number format, try it again.");
-					System.out.print(outputStr.toString()); 
-					return;
-				}
-				if (numberOfelements <= 0){
-					System.out.println("please enter a number > 0");
-					System.out.print(outputStr.toString());
-					return;
-				}
-				// empty array list created
-				arrayLists.add(Arrays.asList(new Integer [Integer.parseInt(inputStr)]));
-
-				for (int j = 0; j < arrayLists.get(i).size(); j++) {
-					System.out.println("enter integer on index [" + j + "]: ");
-					// validation of each element of list
-					try {
-						inputStr = br.readLine();
-						arrayLists.get(i).set(j, Integer.parseInt(inputStr));
-					}
-					catch (IOException e){
-						System.out.println("Could not read data from command line, try it again.");
-						System.out.print(outputStr.toString());
-						return;
-					}
-					catch (NumberFormatException e){
-						System.out.println("Incorrect number format, try it again.");
-						System.out.print(outputStr.toString());
-						return;
-					}
-				}
-				System.out.print("created list with " + arrayLists.get(i).size() + " elements:");
-				System.out.print(arrayLists.get(i));
-				System.out.println();
 			}	
 
 			// apply sorting algorithms on the lists and print the result
@@ -170,5 +132,47 @@ public class CLI {
 				System.out.println();	
 			}	
 		}
+	}
+
+	private static List<Integer> createList(BufferedReader br, StringBuffer outputStr, int i) throws AlgorithmsCliException {
+		String inputStr = null;
+		int numberOfelements = 0;
+
+		System.out.print("enter number of elements for list " + i + ":");
+		// number of list validation
+		try {
+			inputStr = br.readLine();
+			numberOfelements = Integer.parseInt(inputStr);
+		}
+		catch (IOException e){
+			throw new AlgorithmsCliException("Could not read data from command line, try it again.\n" + outputStr.toString());
+		}
+		catch (NumberFormatException e){
+			throw new AlgorithmsCliException("Incorrect number format, try it again.\n" + outputStr.toString());
+		}
+		if (numberOfelements <= 0){
+			throw new AlgorithmsCliException("please enter a number > 0\n" + outputStr.toString());
+		}
+		// empty array list created
+		List<Integer> list = Arrays.asList(new Integer [Integer.parseInt(inputStr)]);
+		for (int j = 0; j < list.size(); j++) {
+			System.out.println("enter integer on index [" + j + "]: ");
+			// validation of each element of list
+			try {
+				inputStr = br.readLine();
+				list.set(j, Integer.parseInt(inputStr));
+			}
+			catch (IOException e){
+				throw new AlgorithmsCliException("Could not read data from command line, try it again.\n" + outputStr.toString());
+			}
+			catch (NumberFormatException e){
+				throw new AlgorithmsCliException("Incorrect number format, try it again.\n" + outputStr.toString());
+			}
+		}
+		System.out.print("created list with " + list.size() + " elements:");
+		System.out.print(list);
+		System.out.println();
+
+		return list;
 	}
 }
