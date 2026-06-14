@@ -154,36 +154,36 @@ public class Sorting {
 	 */
 	public static List<Integer> sort (List<Integer> a , List <Integer> b){
 		List<Integer> result = Arrays.asList(new Integer [a.size() + b.size()]);
-		int i = 0; // index for array a
-		int j = 0; // index for array b
-		int k = 0; // index for array result
-		while (i < a.size() || j < b.size()){
-			// case if array a is empty or we are already at its end
-			if (i == a.size()) {
-				while (k < result.size() && j < b.size()){
-					result.set(k, b.get(j));
-					j++; k++;
+		int idx_a = 0;
+		int idx_b = 0;
+		int idx_result = 0;
+		while (idx_a < a.size() || idx_b < b.size()){
+			// case if array a is empty or we are already at the end
+			if (idx_a == a.size()) {
+				while (idx_result < result.size() && idx_b < b.size()){
+					result.set(idx_result, b.get(idx_b));
+					idx_b++; idx_result++;
 				}
 				break;
 			} 
-			// case if array b is empty or we are already at its end
-			else if (j == b.size()){
-				while (k < result.size() && i < a.size()){
-					result.set(k, a.get(i));
-					i++; k++;
+			// case if array b is empty or we are already at the end
+			else if (idx_b == b.size()){
+				while (idx_result < result.size() && idx_a < a.size()){
+					result.set(idx_result, a.get(idx_a));
+					idx_a++; idx_result++;
 				}
 				break;
 			}
 			// case if we are not at the end of array a or b, so we can compare their values
-			else if (a.get(i) < b.get(j)){
-				result.set(k, a.get(i));
-				i++;
+			else if (a.get(idx_a) < b.get(idx_b)){
+				result.set(idx_result, a.get(idx_a));
+				idx_a++;
 			} // a_[i] >= b_[j]
 			else {
-				result.set(k, b.get(j));
-				j++;
+				result.set(idx_result, b.get(idx_b));
+				idx_b++;
 			}
-			k++;
+			idx_result++;
 		}
 		return result; 
 	}
